@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# app data
+data/*.db
+data/*.db-*
+
+# документы требований (не публикуются)
+docs/

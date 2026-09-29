@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skuratov Coffee · панель сотрудника</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+  <script type="module" src="/static/js/staff.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <div class="brand">Панель сотрудника <small>учебная демо-точка Skuratov Coffee</small></div>
+      <nav class="tabs" role="tablist" aria-label="Разделы" id="staff-tabs" hidden>
+        <button class="tab" role="tab" data-tab="queue" aria-selected="true">Очередь</button>
+        <button class="tab" role="tab" data-tab="intake">Приём</button>
+        <button class="tab" role="tab" data-tab="summary">Сводка</button>
+        <button class="tab" type="button" id="logout">Выйти</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <form class="card login" id="login-form" hidden>
+      <h2>Вход сотрудника</h2>
+      <label class="field" for="password">Пароль
+        <input type="password" id="password" autocomplete="current-password" required>
+      </label>
+      <button class="btn" type="submit">Войти</button>
+      <div class="msg" id="login-msg" role="alert"></div>
+    </form>
+
+    <div id="app" hidden>
+      <div class="msg" id="staff-msg" role="status" aria-live="polite"></div>
+
+      <section id="queue" role="tabpanel">
+        <div class="row between">
+          <h2>Очередь на сегодня</h2>
+          <div class="row">
+            <label class="switch"><input type="checkbox" id="show-all"> показывать завершённые</label>
+            <span class="muted" id="queue-updated"></span>
+            <button class="btn ghost small" id="queue-refresh" type="button">Обновить</button>
+          </div>
+        </div>
+        <div id="queue-list"></div>
+        <h2>Завершение дня</h2>
+        <div class="card">
+          <p class="muted">После закрытия: «Принят» и «Готовится» отменяются с причиной «Не выполнен до закрытия»,
+            «Готов» переводится в «Не получен». До закрытия действие недоступно.</p>
+          <div class="row"><button class="btn danger" id="close-day" type="button">Завершить день</button></div>
+        </div>
+      </section>
+
+      <section id="intake" role="tabpanel" hidden>
+        <h2>Управление приёмом</h2>
+        <div class="card">
+          <label class="switch"><input type="checkbox" id="pause"> Пауза: не принимать новые заказы</label>
+          <p class="muted">Пауза, стоп-лист и снижение лимита не удаляют и не меняют уже принятые заказы.</p>
+        </div>
+        <h2>Стоп-лист</h2>
+        <div class="grid">
+          <div class="card"><h3>Напитки</h3><div id="stop-drinks"></div></div>
+          <div class="card"><h3>Добавки</h3><div id="stop-addons"></div></div>
+        </div>
+        <h2>Лимиты интервалов на сегодня</h2>
+        <div class="card table-wrap">
+          <table>
+            <thead><tr><th>Интервал</th><th>Занято</th><th>Лимит</th><th>Остаток</th><th></th></tr></thead>
+            <tbody id="limits"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="summary" role="tabpanel" hidden>
+        <div class="row between">
+          <h2>Дневная сводка</h2>
+          <div class="row">
+            <input type="date" id="summary-day" aria-label="Дата сводки">
+            <button class="btn ghost small" id="summary-refresh" type="button">Показать</button>
+          </div>
+        </div>
+        <div id="summary-body"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

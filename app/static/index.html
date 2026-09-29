@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skuratov Coffee · учебный предзаказ</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+  <script type="module" src="/static/js/guest.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <div class="brand">Skuratov Coffee <small>учебный предзаказ с самовывозом</small></div>
+      <nav class="tabs" role="tablist" aria-label="Разделы">
+        <button class="tab" role="tab" data-tab="menu" aria-selected="true">Меню</button>
+        <button class="tab" role="tab" data-tab="cart">Корзина <span class="badge-count" id="cart-count">0</span></button>
+        <button class="tab" role="tab" data-tab="orders">Мои заказы</button>
+        <button class="tab" role="tab" data-tab="favorites">Избранное</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="notice" id="notice">Загрузка…</div>
+    <p class="point-info" id="point-info"></p>
+    <div class="msg" id="global-msg" role="status" aria-live="polite"></div>
+
+    <section id="menu" role="tabpanel">
+      <h2>Меню</h2>
+      <div class="grid" id="menu-grid"></div>
+    </section>
+
+    <section id="cart" role="tabpanel" hidden>
+      <h2>Корзина</h2>
+      <div class="card">
+        <div id="cart-lines"></div>
+        <div class="row between">
+          <span class="muted" id="cart-qty"></span>
+          <span class="total" id="cart-total"></span>
+        </div>
+        <div class="row">
+          <button class="btn ghost small" id="save-favorite" type="button">Сохранить корзину в избранное</button>
+        </div>
+      </div>
+
+      <h2>Пожелание</h2>
+      <div class="card">
+        <label class="field" for="wish">Необязательно. Пожелание не меняет состав и цену и не гарантирует исполнение.
+          Не указывайте личные данные.
+          <textarea id="wish" maxlength="1000" placeholder="Например: погорячее, пожалуйста"></textarea>
+        </label>
+        <span class="muted" id="wish-counter" aria-live="polite"></span>
+      </div>
+
+      <h2>Время получения</h2>
+      <div class="card">
+        <p class="muted" id="slots-hint">Интервал — плановое окно готовности и получения, а не гарантия отсутствия ожидания.</p>
+        <div class="slots" id="slots"></div>
+      </div>
+
+      <div class="row mt">
+        <button class="btn" id="to-confirm" type="button">Проверить заказ</button>
+      </div>
+
+      <div class="card mt" id="confirm" hidden>
+        <h3>Проверьте заказ перед отправкой</h3>
+        <div id="confirm-body"></div>
+        <div class="msg" id="confirm-msg" role="alert"></div>
+        <div class="row">
+          <button class="btn" id="confirm-send" type="button">Подтвердить заказ</button>
+          <button class="btn ghost" id="confirm-check" type="button" hidden>Проверить результат</button>
+          <button class="btn ghost" id="confirm-cancel" type="button">Изменить</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="orders" role="tabpanel" hidden>
+      <div class="row between">
+        <h2>Мои заказы</h2>
+        <div class="row">
+          <span class="muted" id="orders-updated"></span>
+          <button class="btn ghost small" id="orders-refresh" type="button">Обновить</button>
+        </div>
+      </div>
+      <p class="muted">Заказы видны только в этом браузере. Номер заказа нужен для выдачи, но не даёт доступа к нему.</p>
+      <div class="grid" id="orders-list"></div>
+    </section>
+
+    <section id="favorites" role="tabpanel" hidden>
+      <h2>Избранное</h2>
+      <p class="muted">Сохранённые корзины хранятся только в этом браузере. При повторе проверяются текущие цены и доступность;
+        время и пожелание не переносятся.</p>
+      <div class="grid" id="favorites-list"></div>
+    </section>
+  </main>
+</body>
+</html>
